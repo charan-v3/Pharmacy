@@ -1,0 +1,32 @@
+
+{% extends 'home/base.html' %}
+{% block content %}
+  <div class="container">
+    <h1>Field Types</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Drug Name</th>
+          <th scope="col">Batch</th>
+          <th scope="col">Types</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for medicine in medicines %}
+        <tr>
+          <td>{{ medicine.id }}</td>
+          <td>{{ medicine.drugname }}</td>
+          <td>{{ medicine.batchno }}</td>
+          <td>{{ medicine.medtype}}</td>
+          <td>{{ medicine.stockqty}}</td>
+          <td>{{ medicine.price}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock content %}

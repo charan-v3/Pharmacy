@@ -1,0 +1,24 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="row">
+{% for medicine in medicines %}
+<div class="col-md-4 mb-4">
+  <div class="card d-block">
+    <img src="{{ medicine.img }}" alt="Tablet" class="card-img-top img-fluid" style="max-width: 100%;
+    height: 200px;
+    border-radius: 5px">
+      <div class="card-body">
+          <h5 class="card-title">{{ medicine.drugname }}    &#x20B9;{{ medicine.price }}</h5>
+          <small class="card-body">Manufacturer: {{ medicine.manufacturer }} <br> Medicine Type: {{ medicine.medtype }}</small>
+          <small class="card-body">{{medicine.description}}</small>
+      </div>
+  </div>
+</div>
+
+{% endfor %}
+</div>
+</div>
+<hr> 
+{% endblock content %}
