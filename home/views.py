@@ -8,7 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 data = {"medicines": medicine.objects.all(), "title": "Home"}
 
 def home(request):
-    return render(request, "home/workerHome.html", data)
+    return render(request, "home/customerHome.html", data)
 
 
 def register(request):
