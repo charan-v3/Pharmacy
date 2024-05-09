@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from PIL import Image
 
 
 class Insurance(models.Model):
@@ -32,30 +33,44 @@ class medicine(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(default="default.jpg", upload_to="UserImages/")
-    # displayName = models.CharField(default="", max_length=100)
-    # Date_of_Birth = models.DateField(default="YYYY-MM-DD")
-    # BLOOD_GROUP_CHOICES = [
-    #     ("A+", "A+"),
-    #     ("A-", "A-"),
-    #     ("B+", "B+"),
-    #     ("B-", "B-"),
-    #     ("AB+", "AB+"),
-    #     ("AB-", "AB-"),
-    #     ("O+", "O+"),
-    #     ("O-", "O-"),
-    # ]
-    # bloodGroup = models.CharField(choices=BLOOD_GROUP_CHOICES, max_length=3, default="")
-    # phone = models.CharField(max_length=15, default="")
-    # TempAddress = models.TextField(default="")
-    # PermanentAddress = models.TextField(default="")
-    # USER_TYPE_CHOICES = [
-    #     ("Customer", "Customer"),
-    #     ("Worker", "Worker"),
-    #     ("Owner", "Owner"),
-    #     ("Admin", "Admin"),
-    # ]
-    # user_type = models.CharField(choices=USER_TYPE_CHOICES, max_length=10, default="")
+    image = models.ImageField(default="UserImages\default.jpg", upload_to="UserImages/")
+    displayName = models.CharField(default="User", max_length=100)
+    Date_of_Birth = models.DateField(default="2000-01-01")
+    BLOOD_GROUP_CHOICES = [
+        ("A+", "A+"),
+        ("A-", "A-"),
+        ("B+", "B+"),
+        ("B-", "B-"),
+        ("AB+", "AB+"),
+        ("AB-", "AB-"),
+        ("O+", "O+"),
+        ("O-", "O-"),
+    ]
+    bloodGroup = models.CharField(
+        choices=BLOOD_GROUP_CHOICES, max_length=3, default="O+"
+    )
+    phone = models.CharField(max_length=15, default="+1234567890")
+    TempAddress = models.TextField(default="Temporary Address")
+    PermanentAddress = models.TextField(default="Permanent Address")
+    USER_TYPE_CHOICES = [
+        ("Customer", "Customer"),
+        ("Worker", "Worker"),
+        ("Owner", "Owner"),
+        ("Admin", "Admin"),
+    ]
+    user_type = models.CharField(
+        choices=USER_TYPE_CHOICES, max_length=10, default="Customer"
+    )
 
     def __str__(self):
         return f"{self.user.username} Profile"
+
+    def save(self):
+        super().save()
+
+        image = Image.open(self.image.path)
+
+        if image.height > 300 or image.width > 300:
+            output_size = (300, 300)
+            image.thumbnail(output_size)
+            image.save(self.image.path)
