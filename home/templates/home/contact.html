@@ -1,0 +1,48 @@
+{% extends 'home/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 left-side mb-5">
+            <div class="address details text-center">
+                <i class="fas fa-map-marker-alt" style="color: #3e2093;"></i>
+                <div class="topic" style="color: #3e2093;">Address</div>
+                <div class="text-one">Surkhet, NP12</div>
+                <div class="text-two">Birendranagar 06</div>
+            </div>
+            <hr class="mt-4 mb-4">
+            <div class="phone details text-center">
+                <i class="fas fa-phone-alt" style="color: #3e2093;"></i>
+                <div class="topic" style="color: #3e2093;">Phone</div>
+                <div class="text-one">+0098 9893 5647</div>
+                <div class="text-two">+0096 3434 5678</div>
+            </div>
+            <hr class="mt-4 mb-4">
+            <div class="email details text-center">
+                <i class="fas fa-envelope" style="color: #3e2093;"></i>
+                <div class="topic" style="color: #3e2093;">Email</div>
+                <div class="text-one">codinglab@gmail.com</div>
+                <div class="text-two">info.codinglab@gmail.com</div>
+            </div>
+        </div>
+        <div class="col-md-9 right-side mb-5">
+            <div class="topic-text mb-4" style="color: #3e2093;">Send us a message</div>
+            <p style="color: #3e2093;">We invite you to experience the difference at Pharmacy+. We look forward to serving you and helping you achieve your health goals. </p>
+            <form action="#">
+                <div class="form-group mb-4">
+                    <input type="text" placeholder="Enter your name" class="form-control">
+                </div>
+                <div class="form-group mb-4">
+                    <input type="text" placeholder="Enter your Query" class="form-control">
+                </div>
+                <div class="form-group mb-4">
+                    <textarea placeholder="Enter your message" class="form-control"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Now</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

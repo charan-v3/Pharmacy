@@ -12,6 +12,7 @@
           <th scope="col">Types</th>
           <th scope="col">Quantity</th>
           <th scope="col">Price</th>
+          <th scope="col">Bill</th>
 
         </tr>
       </thead>
@@ -24,6 +25,7 @@
           <td>{{ medicine.medtype}}</td>
           <td>{{ medicine.stockqty}}</td>
           <td>{{ medicine.price}}</td>
+          <td><input type="button" value="Add" class="p-1 m-1"><input type="button" class="p-1 m-1" value="Remove"></td>
         </tr>
         {% endfor %}
       </tbody>
