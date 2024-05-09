@@ -10,10 +10,8 @@
       </select>
     </div>
 
-    <!-- Button for billing -->
-    <button type="button" class="btn btn-primary mb-3">Bill</button>
+    <button type="button" class="btn btn-primary mb-3" id="billButton">Bill</button>
 
-    <!-- Table to display medicines -->
     <table class="table table-striped">
       <thead>
         <tr>
@@ -35,7 +33,7 @@
             <td>{{ medicine.medtype }}</td>
             <td>{{ medicine.stockqty }}</td>
             <td>{{ medicine.price }}</td>
-            <td><input type="number" class="form-control" value="0" min="1"></td>
+            <td><input type="number" class="form-control" value="0" min="0"></td>
             <td>
               <input type="button" value="Add" class="p-1 m-1">
             </td>
@@ -44,4 +42,21 @@
       </tbody>
     </table>
   </div>
+  <!-- <script>
+    $(document).ready(function() {
+        $('#billButton').click(function() {
+            $.ajax({
+                type: 'GET',
+                url: '/create_bill/',
+                success: function(data) {
+                    alert('Bill created successfully!');
+                },
+                error: function(xhr, status, error) {
+                    alert('Error creating bill: ' + error);
+                }
+            });
+        });
+    });
+</script> -->
+
 {% endblock content %}

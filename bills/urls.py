@@ -5,7 +5,6 @@ from django.contrib.auth import views as auth_view
 
 urlpatterns = [
     path("", views.bill_summary, name="bill_summary"),
-    path("add/", views.bill_add, name="bill_add"),
-    path("delete/", views.bill_delete, name="bill_delete"),
-    path("update/", views.bill_update, name="bill_update"),
+    path("create_bill/", views.create_bill, name="create_bill"),
+    path("add_item_to_bill/", views.add_item_to_bill, name="add_item_to_bill"),
 ]

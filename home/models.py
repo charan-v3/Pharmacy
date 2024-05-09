@@ -10,7 +10,7 @@ class Insurance(models.Model):
     provider_name = models.CharField(max_length=100)
     holder_name = models.CharField(max_length=100)
     start_date = models.DateField(default=timezone.now)
-    end_date = models.DateField()
+    end_date = models.DateField(default="2025-02-09")
 
     def __str__(self):
         return self.policy_number

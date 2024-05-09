@@ -3,7 +3,12 @@ from django.http import HttpResponse
 from django.contrib import messages
 from .models import medicine, Profile
 from django.views.generic import ListView
-from .forms import UserRegisterForm, ProfileUpdateForm, UserUpdateForm
+from .forms import (
+    UserRegisterForm,
+    ProfileUpdateForm,
+    UserUpdateForm,
+    InsuranceUpdateForm,
+)
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 
@@ -62,6 +67,24 @@ def profileview(request):
 
     context = {"u_form": u_form, "p_form": p_form}
     return render(request, "home/profile.html", context)
+
+
+@login_required
+def insurance(request):
+    if request.method == "POST":
+        i_form = InsuranceUpdateForm(request.POST, instance=request.user.insurance)
+        if i_form.is_valid():
+            i_form.save()
+            messages.success(request, "Insurance information updated successfully.")
+            return redirect("insurance")
+        else:
+            messages.error(
+                request, "Error updating insurance information. Please check the form."
+            )
+    else:
+        i_form = InsuranceUpdateForm(instance=request.user.insurance)
+    context = {"i_form": i_form}
+    return render(request, "home/insure.html", context)
 
 
 def about(request):

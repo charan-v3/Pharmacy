@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, Insurance
 
 
 class UserRegisterForm(UserCreationForm):
@@ -45,4 +45,17 @@ class ProfileUpdateForm(forms.ModelForm):
             "phone",
             "TempAddress",
             "PermanentAddress",
+        ]
+
+
+class InsuranceUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Insurance
+        fields = [
+            "user",
+            "policy_number",
+            "provider_name",
+            "holder_name",
+            "start_date",
+            "end_date",
         ]
