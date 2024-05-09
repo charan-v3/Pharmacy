@@ -44,11 +44,11 @@ def register(request):
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get("username")
+            user = form.save()
+            username = user.username
             messages.success(
                 request,
-                f"You are ready to user Your Account ! You can login here {username}!",
+                f"You are ready to use Your Account! You can log in here {username}!",
             )
             return redirect("login")
     else:
