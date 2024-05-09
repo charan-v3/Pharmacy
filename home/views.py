@@ -2,15 +2,46 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from .models import medicine, Profile
+from django.views.generic import ListView
 from .forms import UserRegisterForm, ProfileUpdateForm, UserUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 
-data = {"medicines": medicine.objects.all(), "title": "Home"}
+data = {
+    "medicines": medicine.objects.all(),
+    "title": "Home",
+    "profiles": Profile.objects.filter(user_type="Customer"),
+}
 profiles = {"profile": Profile.objects.first(), "title": "Profile Page"}
 
 def home(request):
-    return render(request, "home/customerHome.html", data)
+    if not request.user.is_authenticated:
+        return render(request, "home/customerHome.html", data)
+
+    if request.user.profile.user_type == "Customer":
+        return render(request, "home/customerHome.html", data)
+    else:
+        return render(request, "home/workerHome.html", data)
+
+
+class PostListView(ListView):
+    model = medicine
+    context_object_name = "medicines"
+    ordering = ["drugname"]
+
+    def get_template_names(self):
+        if (
+            not self.request.user.is_authenticated
+            or self.request.user.profile.user_type == "Customer"
+        ):
+            return ["home/customerHome.html"]
+        else:
+            return ["home/workerHome.html"]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["profiles"] = Profile.objects.filter(user_type="Customer")
+        return context
 
 
 @login_required
