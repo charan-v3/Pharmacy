@@ -28,3 +28,34 @@ class medicine(models.Model):
 
     def __str__(self):
         return self.drugname
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(default="default.jpg", upload_to="UserImages/")
+    # displayName = models.CharField(default="", max_length=100)
+    # Date_of_Birth = models.DateField(default="YYYY-MM-DD")
+    # BLOOD_GROUP_CHOICES = [
+    #     ("A+", "A+"),
+    #     ("A-", "A-"),
+    #     ("B+", "B+"),
+    #     ("B-", "B-"),
+    #     ("AB+", "AB+"),
+    #     ("AB-", "AB-"),
+    #     ("O+", "O+"),
+    #     ("O-", "O-"),
+    # ]
+    # bloodGroup = models.CharField(choices=BLOOD_GROUP_CHOICES, max_length=3, default="")
+    # phone = models.CharField(max_length=15, default="")
+    # TempAddress = models.TextField(default="")
+    # PermanentAddress = models.TextField(default="")
+    # USER_TYPE_CHOICES = [
+    #     ("Customer", "Customer"),
+    #     ("Worker", "Worker"),
+    #     ("Owner", "Owner"),
+    #     ("Admin", "Admin"),
+    # ]
+    # user_type = models.CharField(choices=USER_TYPE_CHOICES, max_length=10, default="")
+
+    def __str__(self):
+        return f"{self.user.username} Profile"
