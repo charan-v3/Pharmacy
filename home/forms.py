@@ -59,3 +59,7 @@ class InsuranceUpdateForm(forms.ModelForm):
             "start_date",
             "end_date",
         ]
+
+
+class SearchForm(forms.Form):
+    medicine = forms.CharField()
